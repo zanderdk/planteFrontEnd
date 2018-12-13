@@ -4,6 +4,6 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div>Red led:<mat-slider (change)="r = $event.value; change()"></mat-slider></div>
-<div>Green led:<mat-slider (change)="g = $event.value; change()"></mat-slider></div>
-<div>blue led:<mat-slider (change)="b = $event.value; change()"></mat-slider></div>
+<div>Red led:<mat-slider (input)="r = $event.value; change()"></mat-slider></div>
+<div>Green led:<mat-slider (input)="g = $event.value; change()"></mat-slider></div>
+<div>blue led:<mat-slider (input)="b = $event.value; change()"></mat-slider></div>
