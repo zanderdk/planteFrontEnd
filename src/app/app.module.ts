@@ -10,6 +10,7 @@ import {MatButtonModule,
         MatToolbarModule,
         MatSliderModule} from '@angular/material';
 import { LedComponent } from './led/led.component';
+import {APP_BASE_HREF} from '@angular/common';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -34,7 +35,9 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatSliderModule
   ],
-  providers: [],
+  providers: [
+    {provide: APP_BASE_HREF, useValue : '/' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
