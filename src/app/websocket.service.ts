@@ -22,7 +22,7 @@ export class WebsocketService {
         new_uri = 'ws:';
     }
     new_uri += '//' + loc.host.split(':')[0];
-    new_uri += ':8080';
+    new_uri += '/websocket';
     const connection = websocketConnect(new_uri, this.input);
     this.connectionStatus = connection.connectionStatus;
     this.messages = connection.messages;
