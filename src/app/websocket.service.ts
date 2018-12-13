@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { QueueingSubject } from 'queueing-subject';
 import websocketConnect from 'rxjs-websockets';
+import { Led, ledSelector } from './state';
+import { Store } from '@ngrx/store';
+import { LedActionTypes } from './led.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService {
-
+export class WebsocketService implements OnDestroy {
   messages: Observable<string>;
   connectionStatus: Observable<number>;
   input: QueueingSubject<string>;
+  led: Observable<Led>;
+  messagesSubscription: Subscription;
 
-  constructor() {
+  constructor(private ledStore: Store<Led>) {
+    this.led = ledStore.select(ledSelector);
     this.input = new QueueingSubject<string>();
     const loc = window.location;
     let new_uri = '';
@@ -27,8 +32,10 @@ export class WebsocketService {
     this.connectionStatus = connection.connectionStatus;
     this.messages = connection.messages;
 
-    const messagesSubscription = this.messages.subscribe((message: string) => {
-      console.log('received message:', message);
+    this.messagesSubscription = this.messages.subscribe((message: string) => {
+      const json = JSON.parse(message);
+      const command: Led = json;
+      this.ledStore.dispatch( {type: LedActionTypes.CHANGE_TO_SOLID_DONE, payload: command} );
     });
   }
 
@@ -36,13 +43,16 @@ export class WebsocketService {
     return this.messages;
   }
 
-  public sendSolid(x: any) {
-    this.send(JSON.stringify(x));
+  public sendSolid(led: Led): Led {
+    this.send(JSON.stringify(led));
+    return led;
   }
 
   private send(str: string) {
-    console.log(str);
     this.input.next(str);
   }
 
+  ngOnDestroy(): void {
+    this.messagesSubscription.unsubscribe();
+  }
 }

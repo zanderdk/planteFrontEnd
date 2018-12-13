@@ -1,9 +1,5 @@
-.leds-test {
-  padding-top: 50px;
-  text-align: center;
-}
 .led {
-  margin: 0;
+  margin: 0 10px 0 0;
   position: relative;
   display: inline-block;
   width: 1em;
@@ -33,19 +29,5 @@
   font-size: 75%;
 }
 .led.on {
-  box-shadow: inset -0.05em -0.05em 0.5em 0.1em rgba(0, 0, 0, 0.25), inset 0 0 1em 0.1em rgba(255, 255, 255, 0.25), inset 0.2em 0.2em 0.3em rgba(255, 255, 255, 0.0), inset -0.1em -0.1em 0.3em 0.1em rgba(0, 0, 0, 0.0), inset 1em 0.5em 0.3em rgba(0, 0, 0, 0.0), 0 0 1em 0.2em;
-}
-.led.on.blink {
-  -webkit-animation: blink 1s infinite;
-  -moz-animation: blink 1s infinite;
-  -o-animation: blink 1s infinite;
-  animation: blink 1s infinite;
-}
-@keyframes blink {
-  0% {
-    box-shadow: inset 0.2em 0.2em 0.3em rgba(255, 255, 255, 0.25), inset -0.1em -0.1em 0.3em 0.1em rgba(0, 0, 0, 0.25), inset 1em 0.5em 0.3em rgba(0, 0, 0, 0.5) ;
-  }
-  100% {
-    box-shadow: inset -0.05em -0.05em 0.5em 0.1em rgba(0, 0, 0, 0.25), inset 0 0 1em 0.1em rgba(255, 255, 255, 0.25), 0 0 1em 0.2em;
-  }
+  box-shadow: inset -0.05em -0.05em 0.5em 0.1em rgba(0, 0, 0, 0.25), inset 0 0 1em 0.1em rgba(255, 255, 255, 0.25), 0 0 1em 0.2em;
 }

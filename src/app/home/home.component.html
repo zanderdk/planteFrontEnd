@@ -1,9 +1,15 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>Planten</span>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<div>Red led:<mat-slider (input)="r = $event.value; change()"></mat-slider></div>
-<div>Green led:<mat-slider (input)="g = $event.value; change()"></mat-slider></div>
-<div>blue led:<mat-slider (input)="b = $event.value; change()"></mat-slider></div>
+<mat-list>
+  <h3 mat-subheader>Leds</h3>
+ <mat-list-item>
+   <app-led [r]="0.75 + r/400" [intensity]="r/100"></app-led>
+   <mat-slider style = "width:100%" [value]="r" (input)="r = $event.value; change()"></mat-slider>
+</mat-list-item>
+ <mat-list-item>
+   <app-led [g]="0.75 + g/400" [intensity]="g/100"></app-led>
+   <mat-slider style = "width:100%"[value]="g" (input)="g = $event.value; change()"></mat-slider>
+</mat-list-item>
+<mat-list-item>
+    <app-led [b]="0.75 + b/400" [intensity]="b/100"></app-led>
+   <mat-slider style = "width:100%" [value]="b" (input)="b = $event.value; change()"></mat-slider>
+</mat-list-item>
+</mat-list>

@@ -8,9 +8,14 @@ import { HomeComponent } from './home/home.component';
 import {MatButtonModule,
         MatCheckboxModule,
         MatToolbarModule,
+        MatListModule,
         MatSliderModule} from '@angular/material';
 import { LedComponent } from './led/led.component';
 import {APP_BASE_HREF} from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './reducer';
+import { LedEffects } from './led.effects';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -30,10 +35,13 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([LedEffects]),
     MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
-    MatSliderModule
+    MatSliderModule,
+    MatListModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue : '/' }
