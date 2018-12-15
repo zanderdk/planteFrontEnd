@@ -371,7 +371,13 @@ MIT
 
 @angular/material/slider
 
+@angular/material/icon
+
 @angular/material/toolbar
+
+@angular/material/button
+
+@angular/material/sidenav
 
 @ngrx/effects
 MIT
