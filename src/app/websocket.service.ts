@@ -57,7 +57,7 @@ export class WebsocketService implements OnDestroy {
     this.send(JSON.stringify(fade));
   }
 
-  private send(str: string) {
+  public send(str: string) {
     console.log(str);
     this.input.next(str);
   }

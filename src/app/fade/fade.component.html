@@ -1,9 +1,12 @@
 <mat-list>
   <h3 mat-subheader>Leds</h3>
- <mat-list-item *ngFor="let col of fadeSetting.colors">
+ <mat-list-item *ngFor="let col of fadeSetting.colors; let i = index">
    <app-led [r]="0.75 + col.r/400" [intensity]="col.r/100"></app-led>
    <app-led [g]="0.75 + col.g/400" [intensity]="col.g/100"></app-led>
    <app-led [b]="0.75 + col.b/400" [intensity]="col.b/100"></app-led>
+   
+  <span class="example-spacer"></span>
+   <button mat-raised-button color="warn" (click)="remove(i)">remove</button>
 </mat-list-item>
 </mat-list>
 <div class="fab-container">
