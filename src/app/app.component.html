@@ -1,7 +1,22 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+      <button mat-button (click)="togleNav()">
+        <mat-icon *ngIf="!isNavOpen" class="example-icon">menu</mat-icon>
+        <mat-icon *ngIf="isNavOpen" class="example-icon">navigate_before</mat-icon>
+      </button>
     <span>Planten</span>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" [opened]="isNavOpen" role="navigation">
+    <mat-nav-list>
+      <h3 mat-subheader>Led modes:</h3>
+      <a mat-list-item routerLink='/'>Solid colors</a>
+      <a mat-list-item routerLink='/fade'>Fading colors</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

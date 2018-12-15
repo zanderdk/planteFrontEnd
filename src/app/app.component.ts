@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'planteFrontEnd';
+
+  isNavOpen = false;
+
+  togleNav() {
+    this.isNavOpen = ! this.isNavOpen;
+  }
 }

@@ -34,7 +34,12 @@ export class WebsocketService implements OnDestroy {
 
     this.messagesSubscription = this.messages.subscribe((message: string) => {
       const json = JSON.parse(message);
-      const command: Led = json;
+      const command: Led = {
+        type: 'solid',
+        r: json.r,
+        g: json.g,
+        b: json.b
+      };
       this.ledStore.dispatch( {type: LedActionTypes.CHANGE_TO_SOLID_DONE, payload: command} );
     });
   }
