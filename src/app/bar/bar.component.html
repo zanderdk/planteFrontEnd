@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="fixed-header">
+  <mat-toolbar-row>
+      <button mat-button class="menu-button" (click)="togleNav()">
+        <mat-icon *ngIf="!isNavOpen" class="example-icon">menu</mat-icon>
+        <mat-icon *ngIf="isNavOpen" class="example-icon">navigate_before</mat-icon>
+      </button>
+    <span>Planten</span>
+    <span class="example-spacer"></span>
+    <button *ngIf="menuItems.length > 0" mat-button class="menu-button"[matMenuTriggerFor]="menu" >
+      <mat-icon class="example-icon">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let men of menuItems" (click)="men.func()">
+        <mat-icon>{{men.icon}}</mat-icon>
+        <span>{{men.name}}</span>
+      </button>
+    </mat-menu>
+      </mat-toolbar-row>
+</mat-toolbar>

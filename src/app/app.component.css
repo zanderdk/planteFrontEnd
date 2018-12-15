@@ -1,7 +1,15 @@
-.example-icon {
-  /* padding: 0 14px; */
-}
 .example-container {
-  height: 89%;
-  /* margin: 10px; */
+  height: calc(100% - 64px);
+  background: rgb(255, 255, 255);
+  /* margin-top: 64px; */
 }
+
+.example-drawer {
+  background: #fafafa
+}
+
+/* .fixed-header {
+  top: 0;
+  position: fixed;
+  z-index:999;
+} */

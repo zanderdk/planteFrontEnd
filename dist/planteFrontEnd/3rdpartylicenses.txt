@@ -371,11 +371,13 @@ MIT
 
 @angular/material/slider
 
+@angular/material/button
+
 @angular/material/icon
 
-@angular/material/toolbar
+@angular/material/menu
 
-@angular/material/button
+@angular/material/toolbar
 
 @angular/material/sidenav
 

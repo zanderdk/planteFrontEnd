@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Led, ledSelector } from '../state';
 import { Observable, Subscription } from 'rxjs';
 import { LedActionTypes } from '../led.reducer';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ import { LedActionTypes } from '../led.reducer';
 export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private webSocketService: WebsocketService,
-              private ledStore: Store<Led>) {
+              private ledStore: Store<Led>,
+              private globalService: GlobalService) {
                 this.led = ledStore.select(ledSelector);
               }
   r = 0;
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.g = led.g;
       this.b = led.b;
     });
+    this.globalService.newMenu([]);
   }
 
   ngOnDestroy(): void {

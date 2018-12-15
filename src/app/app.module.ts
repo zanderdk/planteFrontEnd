@@ -11,7 +11,8 @@ import {MatButtonModule,
         MatListModule,
         MatSliderModule,
         MatIconModule,
-        MatSidenavModule} from '@angular/material';
+        MatSidenavModule,
+        MatMenuModule} from '@angular/material';
 import { LedComponent } from './led/led.component';
 import {APP_BASE_HREF} from '@angular/common';
 import { StoreModule } from '@ngrx/store';
@@ -19,16 +20,25 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './reducer';
 import { LedEffects } from './led.effects';
 import { FadeEffects } from './fade.effects';
+import { FadeComponent } from './fade/fade.component';
+import { BarComponent } from './bar/bar.component';
+import { GlobalService } from './global.service';
+import { AddFadeColorComponent } from './add-fade-color/add-fade-color.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'fade', component: FadeComponent },
+  { path: 'addFadeColor', component: AddFadeColorComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LedComponent
+    LedComponent,
+    FadeComponent,
+    BarComponent,
+    AddFadeColorComponent
   ],
   imports: [
     BrowserModule,
@@ -47,10 +57,11 @@ const appRoutes: Routes = [
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatMenuModule
   ],
   providers: [
-    {provide: APP_BASE_HREF, useValue : '/' }
+    {provide: APP_BASE_HREF, useValue : '/' },
   ],
   bootstrap: [AppComponent]
 })

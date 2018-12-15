@@ -19,17 +19,26 @@ export class FadeEffects {
 
 
   @Effect()
-  ChangeSolid: Observable<any> = this.actions
+  ChangeFade: Observable<any> = this.actions
     .ofType(FadeActionTypes.CHANGE_TO_FADE)
     .pipe(
       switchMap((actions: ChangeToFade) => {
         return of(actions.payload).pipe(
           map(fadeSetting => {
-            return {type: FadeActionTypes.CHANGE_TO_SOLID_FADE, payload: fadeSetting} as ChangeToFadeDone;
+            return {type: FadeActionTypes.CHANGE_TO_FADE_DONE, payload: fadeSetting} as ChangeToFadeDone;
           })
         );
       })
   );
+
+  @Effect({ dispatch: false })
+  update: Observable<any> = this.actions.pipe(
+    ofType(FadeActionTypes.CHANGE_TO_FADE_DONE),
+    tap((action) => {
+      this.websocketService.sendFade(action.payload);
+    })
+  );
+
 
 
 }

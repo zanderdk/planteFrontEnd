@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { QueueingSubject } from 'queueing-subject';
 import websocketConnect from 'rxjs-websockets';
-import { Led, ledSelector } from './state';
+import { Led, ledSelector, FadeSetting } from './state';
 import { Store } from '@ngrx/store';
 import { LedActionTypes } from './led.reducer';
 
@@ -53,7 +53,12 @@ export class WebsocketService implements OnDestroy {
     return led;
   }
 
+  public sendFade(fade: FadeSetting) {
+    this.send(JSON.stringify(fade));
+  }
+
   private send(str: string) {
+    console.log(str);
     this.input.next(str);
   }
 

@@ -1,0 +1,15 @@
+.example-icon {
+   /* padding: 0 14px;  */
+   min-width: 0px;
+}
+
+.menu-button{
+  min-width: 0;
+  padding: 5px;
+  margin-right: 10px;
+  line-height: 0px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
