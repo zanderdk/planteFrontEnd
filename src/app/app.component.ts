@@ -21,6 +21,6 @@ export class AppComponent {
   }
 
   disconnect() {
-    this.websocketService.send('{"type": "stop"}');
+    this.websocketService.send('{ "type": "stop" }');
   }
 }
