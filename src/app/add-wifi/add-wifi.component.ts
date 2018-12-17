@@ -25,7 +25,6 @@ export class AddWifiComponent implements OnInit, OnDestroy {
   index: number;
   ssid: string;
   password: string;
-  addString = 'add';
 
   ngOnInit() {
     this.wifiSettingSub = zip(this.wifiSettingObs, this.route.paramMap).subscribe(obj => {
@@ -36,7 +35,6 @@ export class AddWifiComponent implements OnInit, OnDestroy {
       this.index = i;
 
       if (this.index !== -1) {
-        this.addString = 'change';
         this.ssid = this.wifiSetting.wifis[i].ssid;
         this.password = this.wifiSetting.wifis[i].password;
       }

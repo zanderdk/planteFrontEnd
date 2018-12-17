@@ -31,11 +31,12 @@ import { FormsModule } from '@angular/forms';
 import { WifiSettingComponent } from './wifi-setting/wifi-setting.component';
 import { WifiEffects } from './wifi.effects';
 import { AddWifiComponent } from './add-wifi/add-wifi.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'fade', component: FadeComponent },
-  { path: 'addFadeColor', component: AddFadeColorComponent },
+  { path: 'addFadeColor/:index', component: AddFadeColorComponent },
   { path: 'fadeSettings', component: FadeSettingComponent },
   { path: 'wifi', component: WifiSettingComponent },
   { path: 'addWifi/:index', component: AddWifiComponent }
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    DragDropModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(

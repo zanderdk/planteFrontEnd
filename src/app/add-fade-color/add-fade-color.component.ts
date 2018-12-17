@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FadeSetting, fadeSettingSelector } from '../state';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Observable, Subscription, zip, VirtualTimeScheduler } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FadeActionTypes } from '../fade.reducer';
 
 @Component({
@@ -13,7 +13,8 @@ import { FadeActionTypes } from '../fade.reducer';
 export class AddFadeColorComponent implements OnInit, OnDestroy {
 
   constructor(private fadeStore: Store<FadeSetting>,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
     this.fadeSettingObs = this.fadeStore.select(fadeSettingSelector);
   }
 
@@ -23,9 +24,21 @@ export class AddFadeColorComponent implements OnInit, OnDestroy {
   fadeSettingObs: Observable<FadeSetting>;
   fadeSetting: FadeSetting;
   fadeSettingSub: Subscription;
+  index: number;
+  addString = 'add';
 
   ngOnInit() {
-    this.fadeSettingSub = this.fadeSettingObs.subscribe((fade) => {this.fadeSetting = fade; });
+    this.fadeSettingSub = zip(this.fadeSettingObs, this.route.paramMap)
+      .subscribe((fade) => {
+        this.fadeSetting = fade[0];
+        const i: number = +fade[1].get('index');
+        if (i !== -1) {
+          this.r = this.fadeSetting.colors[i].r;
+          this.g = this.fadeSetting.colors[i].g;
+          this.b = this.fadeSetting.colors[i].b;
+        }
+        this.index = i;
+      });
    }
 
   ngOnDestroy() {
@@ -35,9 +48,15 @@ export class AddFadeColorComponent implements OnInit, OnDestroy {
   change() { }
 
   done() {
-    this.fadeSetting.colors.push({ r: this.r, g: this.g, b: this.b });
-    this.fadeStore.dispatch( { type: FadeActionTypes.CHANGE_TO_FADE, payload: this.fadeSetting } );
-    this.router.navigate(['fade']);
+    if (this.index === -1) {
+      this.fadeSetting.colors.push({ r: this.r, g: this.g, b: this.b });
+      this.fadeStore.dispatch( { type: FadeActionTypes.CHANGE_TO_FADE, payload: this.fadeSetting } );
+      this.router.navigate(['fade']);
+    } else {
+      this.fadeSetting.colors[this.index] = { r: this.r, g: this.g, b: this.b };
+      this.fadeStore.dispatch( { type: FadeActionTypes.CHANGE_TO_FADE, payload: this.fadeSetting } );
+      this.router.navigate(['fade']);
+    }
   }
 
   back() {

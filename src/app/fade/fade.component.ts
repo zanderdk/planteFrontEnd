@@ -3,9 +3,10 @@ import { GlobalService } from '../global.service';
 import { FadeSetting, fadeSettingSelector } from '../state';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { WebsocketService } from '../websocket.service';
 import { FadeActionTypes } from '../fade.reducer';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-fade',
@@ -17,7 +18,7 @@ export class FadeComponent implements OnInit, OnDestroy {
   constructor(private globalService: GlobalService,
               private fadeStore: Store<FadeSetting>,
               private router: Router,
-              private websocketService: WebsocketService) {
+              private route: ActivatedRoute) {
                 this.fadeSettingObs = this.fadeStore.select(fadeSettingSelector);
   }
   fadeSettingObs: Observable<FadeSetting>;
@@ -38,12 +39,16 @@ export class FadeComponent implements OnInit, OnDestroy {
   }
 
   add() {
-    this.router.navigate(['addFadeColor']);
+    this.router.navigate(['addFadeColor', -1]);
   }
 
   remove(i: number) {
     this.fadeSetting.colors.splice(i, 1);
     this.fadeStore.dispatch( { type: FadeActionTypes.CHANGE_TO_FADE, payload: this.fadeSetting } );
+  }
+
+  change(i: number) {
+    this.router.navigate(['addFadeColor', i]);
   }
 
 }
