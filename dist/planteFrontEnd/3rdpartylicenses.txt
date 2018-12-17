@@ -373,9 +373,9 @@ MIT
 
 @angular/material/button
 
-@angular/material/form-field
-
 @angular/material/icon
+
+@angular/material/form-field
 
 @angular/material/menu
 
