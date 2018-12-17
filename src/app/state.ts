@@ -9,8 +9,8 @@ export type WifiSetting = { type: string, wifis: {ssid: string, password: string
 export const wifiInitialState = {
     type: 'wifi',
     wifis: [{
-        ssid: 'wireless',
-        password: 'oklahoma'
+        ssid: 'sukat83dybde46panda',
+        password: '1631d93bb0abe9e5b34c06c45f'
     }]
 };
 
