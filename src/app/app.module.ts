@@ -12,7 +12,9 @@ import {MatButtonModule,
         MatSliderModule,
         MatIconModule,
         MatSidenavModule,
-        MatMenuModule} from '@angular/material';
+        MatMenuModule,
+        MatFormFieldModule,
+        MatInputModule} from '@angular/material';
 import { LedComponent } from './led/led.component';
 import {APP_BASE_HREF} from '@angular/common';
 import { StoreModule } from '@ngrx/store';
@@ -24,11 +26,14 @@ import { FadeComponent } from './fade/fade.component';
 import { BarComponent } from './bar/bar.component';
 import { GlobalService } from './global.service';
 import { AddFadeColorComponent } from './add-fade-color/add-fade-color.component';
+import { FadeSettingComponent } from './fade-setting/fade-setting.component';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'fade', component: FadeComponent },
-  { path: 'addFadeColor', component: AddFadeColorComponent }
+  { path: 'addFadeColor', component: AddFadeColorComponent },
+  { path: 'fadeSettings', component: FadeSettingComponent }
 ];
 
 @NgModule({
@@ -38,7 +43,8 @@ const appRoutes: Routes = [
     LedComponent,
     FadeComponent,
     BarComponent,
-    AddFadeColorComponent
+    AddFadeColorComponent,
+    FadeSettingComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,10 @@ const appRoutes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue : '/' },

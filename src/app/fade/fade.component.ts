@@ -25,7 +25,11 @@ export class FadeComponent implements OnInit, OnDestroy {
   fadeSetting: FadeSetting;
 
   ngOnInit() {
-    this.globalService.newMenu([]);
+    this.globalService.newMenu([
+      {name: 'Fade settings', icon: 'settings', func: () => {
+        this.router.navigate(['fadeSettings']);
+      }}
+    ]);
     this.fadeSettingSub = this.fadeSettingObs.subscribe((fade) => { this.fadeSetting = fade; });
   }
 

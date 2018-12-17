@@ -22,5 +22,6 @@ export class AppComponent {
 
   disconnect() {
     this.websocketService.send('{ "type": "stop" }');
+    this.isNavOpen = false;
   }
 }
