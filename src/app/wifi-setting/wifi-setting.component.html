@@ -1,0 +1,19 @@
+<mat-list>
+  <h3 mat-subheader>Access points</h3>
+  <mat-list-item *ngFor="let wifi of wifiSetting.wifis; let i = index">
+        <mat-form-field class="example-full-width">
+            <input matInput type="stirng" placeholder="ssid" disabled="true" [(ngModel)]="wifi.ssid">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+                <input matInput type="password" placeholder="password" [(ngModel)]="wifi.password" disabled="true">
+        </mat-form-field>
+        <button class="example-button" mat-button (click)="change(i)"><mat-icon class="example-icon">create</mat-icon></button>
+        <button class="example-button" mat-button (click)="delete(i)"><mat-icon class="example-icon">delete</mat-icon></button>
+  </mat-list-item>
+</mat-list>
+
+<div class="fab-container">
+  <button mat-fab class="fab-toggler" (click)="add()">
+    <i class="material-icons">add</i>
+  </button>
+</div>

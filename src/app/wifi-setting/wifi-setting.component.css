@@ -1,3 +1,8 @@
+.example-full-width {
+  width: 100%;
+  margin-right: 10px;
+}
+
 .example-icon {
   margin: 0;
 }
@@ -5,7 +10,7 @@
 .example-button {
   padding-right: 5px;
   padding-left: 5px;
-  width: 34px;
+  width: 68px;
   min-width: 0;
 }
 

@@ -28,12 +28,17 @@ import { GlobalService } from './global.service';
 import { AddFadeColorComponent } from './add-fade-color/add-fade-color.component';
 import { FadeSettingComponent } from './fade-setting/fade-setting.component';
 import { FormsModule } from '@angular/forms';
+import { WifiSettingComponent } from './wifi-setting/wifi-setting.component';
+import { WifiEffects } from './wifi.effects';
+import { AddWifiComponent } from './add-wifi/add-wifi.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'fade', component: FadeComponent },
   { path: 'addFadeColor', component: AddFadeColorComponent },
-  { path: 'fadeSettings', component: FadeSettingComponent }
+  { path: 'fadeSettings', component: FadeSettingComponent },
+  { path: 'wifi', component: WifiSettingComponent },
+  { path: 'addWifi/:index', component: AddWifiComponent }
 ];
 
 @NgModule({
@@ -44,7 +49,9 @@ const appRoutes: Routes = [
     FadeComponent,
     BarComponent,
     AddFadeColorComponent,
-    FadeSettingComponent
+    FadeSettingComponent,
+    WifiSettingComponent,
+    AddWifiComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([LedEffects, FadeEffects]),
+    EffectsModule.forRoot([LedEffects, FadeEffects, WifiEffects]),
     MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,

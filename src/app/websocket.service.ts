@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { QueueingSubject } from 'queueing-subject';
 import websocketConnect from 'rxjs-websockets';
-import { Led, ledSelector, FadeSetting } from './state';
+import { Led, ledSelector, FadeSetting, WifiSetting } from './state';
 import { Store } from '@ngrx/store';
 import { LedActionTypes } from './led.reducer';
 
@@ -55,6 +55,17 @@ export class WebsocketService implements OnDestroy {
 
   public sendFade(fade: FadeSetting) {
     this.send(JSON.stringify(fade));
+  }
+
+  public sendWifi(wifi: WifiSetting) {
+    if (wifi.wifis.length > 0) {
+      const obj = {
+        type: 'wifi',
+        ssid: wifi.wifis[0].ssid,
+        password: wifi.wifis[0].password
+      };
+      this.send(JSON.stringify(obj));
+    }
   }
 
   public send(str: string) {

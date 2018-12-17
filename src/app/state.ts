@@ -4,6 +4,15 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 export type Led = {type: string, r: number, g: number, b: number};
 export type Color = {r: number, g: number, b: number};
 export type FadeSetting = {type: string, fadetime: number, holdtime: number, colors: Color[]};
+export type WifiSetting = { type: string, wifis: {ssid: string, password: string}[] };
+
+export const wifiInitialState = {
+    type: 'wifi',
+    wifis: [{
+        ssid: 'wireless',
+        password: 'oklahoma'
+    }]
+};
 
 export const ledInitialState = {
     type: 'solid',
@@ -25,3 +34,4 @@ export const fadeSettingInitialState = {
 
 export const ledSelector = createFeatureSelector<Led>('led');
 export const fadeSettingSelector = createFeatureSelector<FadeSetting>('fade');
+export const wifiSelector = createFeatureSelector<WifiSetting>('wifi');
