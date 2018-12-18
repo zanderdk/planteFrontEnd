@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FadeSetting, fadeSettingSelector } from '../state';
 import { Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
@@ -8,7 +8,8 @@ import { FadeActionTypes } from '../fade.reducer';
 @Component({
   selector: 'app-fade-setting',
   templateUrl: './fade-setting.component.html',
-  styleUrls: ['./fade-setting.component.css']
+  styleUrls: ['./fade-setting.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FadeSettingComponent implements OnInit, OnDestroy {
 

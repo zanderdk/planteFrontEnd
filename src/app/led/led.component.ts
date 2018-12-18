@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-led',
   templateUrl: './led.component.html',
-  styleUrls: ['./led.component.css']
+  styleUrls: ['./led.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LedComponent implements OnInit {
 
