@@ -32,7 +32,7 @@ export class WebsocketService implements OnDestroy {
     }
     new_uri += '//' + loc.host.split(':')[0];
     new_uri += '/websocket';
-    const connection = websocketConnect('ws://localhost:8080', this.input);
+    const connection = websocketConnect(new_uri, this.input);
     this.connectionStatus = connection.connectionStatus;
     this.messages = connection.messages;
 
