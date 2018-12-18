@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../global.service';
 import { FadeSetting, fadeSettingSelector } from '../state';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-fade',
   templateUrl: './fade.component.html',
-  styleUrls: ['./fade.component.css']
+  styleUrls: ['./fade.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FadeComponent implements OnInit, OnDestroy {
 
