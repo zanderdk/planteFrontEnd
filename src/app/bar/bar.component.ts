@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../global.service';
 import { Observable, Subscriber, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bar',
   templateUrl: './bar.component.html',
-  styleUrls: ['./bar.component.css']
+  styleUrls: ['./bar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarComponent implements OnInit, OnDestroy {
 

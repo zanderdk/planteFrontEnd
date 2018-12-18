@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-led',
@@ -6,14 +6,23 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
   styleUrls: ['./led.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LedComponent implements OnInit {
+export class LedComponent implements OnInit, AfterViewInit {
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
     _intensity = 0;
     _r = 0.0;
     _g = 0.0;
     _b = 0.0;
+
+    shadow = '';
+    color =  '';
+    background = '';
+    style = {};
+
+    ngAfterViewInit() {
+      this.cdr.detach();
+    }
 
     @Input()
     set intensity(i: number) {
@@ -39,11 +48,6 @@ export class LedComponent implements OnInit {
       this.changeShadow();
     }
 
-    shadow = '';
-    color =  '';
-    background = '';
-    style = {};
-
   changeShadow() {
     const i1 = this._intensity;
     const i2 = 0.5 - this._intensity * 0.25;
@@ -61,7 +65,7 @@ export class LedComponent implements OnInit {
     this.color = 'rgba(' + this._r * 255 + ', ' + this._g * 255 + ', ' + this._b * 255 + ', ' + i1 + ')';
     this.background = 'rgba(' + this._r * 255 + ', ' + this._g * 255 + ', ' + this._b * 255 + ', 1)';
 
-
+    this.cdr.detectChanges();
   }
 
   ngOnInit() {

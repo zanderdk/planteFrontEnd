@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { WifiSetting, wifiSelector } from '../state';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -9,7 +9,8 @@ import { WifiSettingActionTypes } from '../wifi.reducer';
 @Component({
   selector: 'app-add-wifi',
   templateUrl: './add-wifi.component.html',
-  styleUrls: ['./add-wifi.component.css']
+  styleUrls: ['./add-wifi.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddWifiComponent implements OnInit, OnDestroy {
 

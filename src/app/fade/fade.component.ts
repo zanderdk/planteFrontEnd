@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { GlobalService } from '../global.service';
 import { FadeSetting, fadeSettingSelector } from '../state';
 import { Store } from '@ngrx/store';
@@ -14,12 +14,13 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./fade.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FadeComponent implements OnInit, OnDestroy {
+export class FadeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private globalService: GlobalService,
               private fadeStore: Store<FadeSetting>,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private cdr: ChangeDetectorRef) {
                 this.fadeSettingObs = this.fadeStore.select(fadeSettingSelector);
   }
   fadeSettingObs: Observable<FadeSetting>;
@@ -32,7 +33,14 @@ export class FadeComponent implements OnInit, OnDestroy {
         this.router.navigate(['fadeSettings']);
       }}
     ]);
-    this.fadeSettingSub = this.fadeSettingObs.subscribe((fade) => { this.fadeSetting = fade; });
+    this.fadeSettingSub = this.fadeSettingObs.subscribe((fade) => {
+      this.fadeSetting = fade;
+      this.cdr.detectChanges();
+    });
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detach();
   }
 
   ngOnDestroy() {
@@ -50,6 +58,10 @@ export class FadeComponent implements OnInit, OnDestroy {
 
   change(i: number) {
     this.router.navigate(['addFadeColor', i]);
+  }
+
+  trackById(index: number, item: any) {
+    return index;
   }
 
 }

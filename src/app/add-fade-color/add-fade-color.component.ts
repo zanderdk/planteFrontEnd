@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FadeSetting, fadeSettingSelector } from '../state';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, zip, VirtualTimeScheduler } from 'rxjs';
@@ -8,7 +8,8 @@ import { FadeActionTypes } from '../fade.reducer';
 @Component({
   selector: 'app-add-fade-color',
   templateUrl: './add-fade-color.component.html',
-  styleUrls: ['./add-fade-color.component.css']
+  styleUrls: ['./add-fade-color.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddFadeColorComponent implements OnInit, OnDestroy {
 
