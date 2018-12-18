@@ -11,8 +11,11 @@
         </mat-form-field>
     </mat-list-item>
     <mat-list-item>
+        <mat-checkbox [(ngModel)]="fadeSetting.random"> Random cycle colors</mat-checkbox>
+    </mat-list-item>
+    <mat-list-item>
         <div class="example-button-row">
-            <button mat-raised-button color="primary" (click)="done()">add</button>
+            <button mat-raised-button color="primary" (click)="done()">Done</button>
             <button mat-raised-button color="warn" (click)="back()">Cancel</button>
         </div>
     </mat-list-item>

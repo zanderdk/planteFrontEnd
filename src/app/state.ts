@@ -3,7 +3,7 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 
 export type Led = {type: string, r: number, g: number, b: number};
 export type Color = {r: number, g: number, b: number};
-export type FadeSetting = {type: string, fadetime: number, holdtime: number, colors: Color[]};
+export type FadeSetting = {type: string, fadetime: number, random: boolean, holdtime: number, colors: Color[]};
 export type WifiSetting = { type: string, wifis: {ssid: string, password: string}[] };
 
 export const wifiInitialState = {
@@ -25,6 +25,7 @@ export const fadeSettingInitialState = {
     type: 'fade',
     fadetime: 5000,
     holdtime: 5000,
+    random: false,
     colors: [
         {r: 255, g: 0, b: 0},
         {r: 0, g: 255, b: 0},

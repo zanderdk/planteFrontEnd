@@ -377,6 +377,8 @@ MIT
 
 @angular/material/form-field
 
+@angular/material/checkbox
+
 @angular/material/menu
 
 @angular/material/toolbar

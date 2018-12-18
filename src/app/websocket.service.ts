@@ -5,6 +5,8 @@ import websocketConnect from 'rxjs-websockets';
 import { Led, ledSelector, FadeSetting, WifiSetting } from './state';
 import { Store } from '@ngrx/store';
 import { LedActionTypes } from './led.reducer';
+import { FadeActionTypes } from './fade.reducer';
+import { WifiSettingActionTypes } from './wifi.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,9 @@ export class WebsocketService implements OnDestroy {
   led: Observable<Led>;
   messagesSubscription: Subscription;
 
-  constructor(private ledStore: Store<Led>) {
+  constructor(private ledStore: Store<Led>,
+              private wifiStore: Store<WifiSetting>,
+              private fadeStore: Store<FadeSetting>) {
     this.led = ledStore.select(ledSelector);
     this.input = new QueueingSubject<string>();
     const loc = window.location;
@@ -28,12 +32,19 @@ export class WebsocketService implements OnDestroy {
     }
     new_uri += '//' + loc.host.split(':')[0];
     new_uri += '/websocket';
-    const connection = websocketConnect(new_uri, this.input);
+    const connection = websocketConnect('ws://localhost:8080', this.input);
     this.connectionStatus = connection.connectionStatus;
     this.messages = connection.messages;
 
     this.messagesSubscription = this.messages.subscribe((message: string) => {
       const json = JSON.parse(message);
+      if (json['wifi'] !== undefined) {
+        const wifi = json['wifi'] as WifiSetting;
+        const fadeSet = json['fade'] as FadeSetting;
+        this.fadeStore.dispatch({type: FadeActionTypes.CHANGE_TO_FADE_DONE, payload: fadeSet });
+        this.wifiStore.dispatch({type: WifiSettingActionTypes.CHANGE_WIFI_DONE, payload: wifi});
+        return;
+      }
       const command: Led = {
         type: 'solid',
         r: json.r,
@@ -42,6 +53,8 @@ export class WebsocketService implements OnDestroy {
       };
       this.ledStore.dispatch( {type: LedActionTypes.CHANGE_TO_SOLID_DONE, payload: command} );
     });
+
+    this.send('{ "type": "settings" }');
   }
 
   public onMessage(): Observable<string> {
@@ -53,19 +66,14 @@ export class WebsocketService implements OnDestroy {
     return led;
   }
 
-  public sendFade(fade: FadeSetting) {
+  public sendFade(fade: FadeSetting): FadeSetting {
     this.send(JSON.stringify(fade));
+    return fade;
   }
 
-  public sendWifi(wifi: WifiSetting) {
-    if (wifi.wifis.length > 0) {
-      const obj = {
-        type: 'wifi',
-        ssid: wifi.wifis[0].ssid,
-        password: wifi.wifis[0].password
-      };
-      this.send(JSON.stringify(obj));
-    }
+  public sendWifi(wifi: WifiSetting): WifiSetting {
+      this.send(JSON.stringify(wifi));
+      return wifi;
   }
 
   public send(str: string) {

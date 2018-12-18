@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of, throwError } from 'rxjs';
 import { logging } from 'protractor';
-import { WifiSettingActionTypes, ChangeWifi } from './wifi.reducer';
+import { WifiSettingActionTypes, ChangeWifi, ChangeWifiDone } from './wifi.reducer';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
 import { SwitchView } from '@angular/common/src/directives/ng_switch';
 import { WebsocketService } from './websocket.service';
@@ -18,12 +18,17 @@ export class WifiEffects {
   ) {}
 
 
- @Effect({ dispatch: false })
-  changeWifi: Observable<any> = this.actions.pipe(
-    ofType(WifiSettingActionTypes.CHANGE_WIFI),
-    tap((action: ChangeWifi) => {
-        this.websocketService.sendWifi(action.payload);
-    })
+  @Effect()
+  ChangeSolid: Observable<any> = this.actions
+    .ofType(WifiSettingActionTypes.CHANGE_WIFI)
+    .pipe(
+      switchMap((actions: ChangeWifi) => {
+        return of(this.websocketService.sendWifi(actions.payload)).pipe(
+          map(wifi => {
+            return {type: WifiSettingActionTypes.CHANGE_WIFI_DONE, payload: actions.payload} as ChangeWifiDone;
+          })
+        );
+      })
   );
 
 
