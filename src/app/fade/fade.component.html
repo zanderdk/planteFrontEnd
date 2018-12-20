@@ -1,6 +1,6 @@
-<mat-list>
-<h3 mat-subheader>Colors</h3>
- <mat-list-item *ngFor="let col of fadeSetting.colors; let i = index, trackBy: trackById">
+<mat-list class="example-list" cdkDropList (cdkDropListDropped)="drop($event)">
+<!-- <h3 mat-subheader>Colors</h3> -->
+ <mat-list-item *ngFor="let col of fadeSetting.colors; let i = index, trackBy: trackById" (cdkDragStarted)="dragStart($event)" (cdkDragEnded)="dragStop($event)" cdkDrag>
    <app-led [r]="col.r" [intensity]="col.r"></app-led>
    <app-led [g]="col.g" [intensity]="col.g"></app-led>
    <app-led [b]="col.b" [intensity]="col.b"></app-led>
@@ -9,6 +9,22 @@
   <button class="example-button" mat-button (click)="remove(i)"><mat-icon class="example-icon">delete</mat-icon></button>
 </mat-list-item>
 </mat-list>
+
+<!-- <div>
+  <h1>sfsd</h1>
+  <h1>sdfsdf</h1>
+</div> -->
+
+<!-- <div class="example-list">
+  <div class="example-box" *ngFor="let col of fadeSetting.colors; let i = index, trackBy: trackById">
+   <app-led [r]="col.r" [intensity]="col.r"></app-led>
+   <app-led [g]="col.g" [intensity]="col.g"></app-led>
+   <app-led [b]="col.b" [intensity]="col.b"></app-led>
+  <button class="example-button" mat-button (click)="change(i)"><mat-icon class="example-icon">create</mat-icon></button>
+  <button class="example-button" mat-button (click)="remove(i)"><mat-icon class="example-icon">delete</mat-icon></button>
+  </div>
+</div> -->
+
 <div class="fab-container">
   <button mat-fab class="fab-toggler" (click)="add()">
     <i class="material-icons">add</i>
