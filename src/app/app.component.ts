@@ -20,8 +20,4 @@ export class AppComponent {
     this.isNavOpen = false;
   }
 
-  disconnect() {
-    this.websocketService.send('{ "type": "stop" }');
-    this.isNavOpen = false;
-  }
 }

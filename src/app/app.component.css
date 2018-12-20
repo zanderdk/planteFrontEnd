@@ -8,6 +8,11 @@
   background: #fafafa
 }
 
+.no-animate {
+   -webkit-transition: none !important;
+   transition: none !important;
+}
+
 /* .fixed-header {
   top: 0;
   position: fixed;

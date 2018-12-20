@@ -1,9 +1,9 @@
 <mat-list>
 <h3 mat-subheader>Colors</h3>
  <mat-list-item *ngFor="let col of fadeSetting.colors; let i = index, trackBy: trackById">
-   <app-led [r]="0.75 + col.r/400" [intensity]="col.r/100"></app-led>
-   <app-led [g]="0.75 + col.g/400" [intensity]="col.g/100"></app-led>
-   <app-led [b]="0.75 + col.b/400" [intensity]="col.b/100"></app-led>
+   <app-led [r]="col.r" [intensity]="col.r"></app-led>
+   <app-led [g]="col.g" [intensity]="col.g"></app-led>
+   <app-led [b]="col.b" [intensity]="col.b"></app-led>
   <span class="example-spacer"></span>
   <button class="example-button" mat-button (click)="change(i)"><mat-icon class="example-icon">create</mat-icon></button>
   <button class="example-button" mat-button (click)="remove(i)"><mat-icon class="example-icon">delete</mat-icon></button>

@@ -26,25 +26,25 @@ export class LedComponent implements OnInit, AfterViewInit {
 
     @Input()
     set intensity(i: number) {
-      this._intensity = i;
+      this._intensity = i / 100;
       this.changeShadow();
     }
 
     @Input()
     set r(i: number) {
-      this._r = i;
+      this._r = 0.75 + i / 400;
       this.changeShadow();
     }
 
     @Input()
     set g(i: number) {
-      this._g = i;
+      this._g = 0.75 + i / 400;
       this.changeShadow();
     }
 
     @Input()
     set b(i: number) {
-      this._b = i;
+      this._b = 0.75 + i / 400;
       this.changeShadow();
     }
 

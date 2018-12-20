@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { WebsocketService } from '../websocket.service';
 import { Store } from '@ngrx/store';
 import { Led, ledSelector } from '../state';
@@ -12,10 +12,11 @@ import { GlobalService } from '../global.service';
   styleUrls: ['./home.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private webSocketService: WebsocketService,
               private ledStore: Store<Led>,
+              private cdr: ChangeDetectorRef,
               private globalService: GlobalService) {
                 this.led = ledStore.select(ledSelector);
               }
@@ -40,8 +41,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.r = led.r;
       this.g = led.g;
       this.b = led.b;
+      this.cdr.detectChanges();
     });
     this.globalService.newMenu([]);
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detach();
   }
 
   ngOnDestroy(): void {
