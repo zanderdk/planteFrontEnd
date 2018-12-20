@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { GlobalService } from '../global.service';
 import { Observable, Subscriber, Subscription } from 'rxjs';
+import { SidebarJSService } from 'ng-sidebarjs';
 
 @Component({
   selector: 'app-bar',
@@ -10,7 +11,9 @@ import { Observable, Subscriber, Subscription } from 'rxjs';
 })
 export class BarComponent implements OnInit, OnDestroy {
 
-  constructor(private globalService: GlobalService) { }
+  constructor(private globalService: GlobalService,
+              public sidebarjsService: SidebarJSService,
+              private cdr: ChangeDetectorRef) { }
 
   _isNavOpen = false;
   menuItems: {name: string, func: () => void, icon: string}[] = [];
@@ -23,6 +26,11 @@ export class BarComponent implements OnInit, OnDestroy {
 
   set isNavOpen(b: boolean) {
     this._isNavOpen = b;
+    if (this.isNavOpen) {
+      this.sidebarjsService.open('sidebar');
+    } else {
+      this.sidebarjsService.close('sidebar');
+    }
     this.isNavOpenChange.emit(this._isNavOpen);
   }
 
@@ -33,6 +41,7 @@ export class BarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuSubscription = this.globalService.menuItems().subscribe((men) => {
       this.menuItems = men;
+      this.cdr.detectChanges();
     });
   }
 
@@ -43,5 +52,4 @@ export class BarComponent implements OnInit, OnDestroy {
   togleNav() {
     this.isNavOpen = !this.isNavOpen;
   }
-
 }

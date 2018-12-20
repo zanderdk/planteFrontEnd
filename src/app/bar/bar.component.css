@@ -13,3 +13,17 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%  !important;
+}
+
+::ng-deep .cdk-overlay-container {
+    /* Do you changes here */
+    position: fixed; 
+    z-index: 10001;
+}

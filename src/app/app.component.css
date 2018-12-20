@@ -1,5 +1,5 @@
 .example-container {
-  height: calc(100% - 64px);
+  height: 50%;
   background: rgb(255, 255, 255);
   /* margin-top: 64px; */
 }
@@ -7,14 +7,3 @@
 .example-drawer {
   background: #fafafa
 }
-
-.no-animate {
-   -webkit-transition: none !important;
-   transition: none !important;
-}
-
-/* .fixed-header {
-  top: 0;
-  position: fixed;
-  z-index:999;
-} */

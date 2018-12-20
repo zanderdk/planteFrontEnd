@@ -32,6 +32,7 @@ import { WifiSettingComponent } from './wifi-setting/wifi-setting.component';
 import { WifiEffects } from './wifi.effects';
 import { AddWifiComponent } from './add-wifi/add-wifi.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SidebarJSModule } from 'ng-sidebarjs';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
+    SidebarJSModule.forRoot(),
     MatSliderModule,
     MatListModule,
     MatIconModule,

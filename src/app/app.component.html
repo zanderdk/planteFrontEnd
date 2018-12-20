@@ -1,6 +1,10 @@
 <app-bar [(isNavOpen)]="isNavOpen"></app-bar>
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #drawer mode="side" class="example-drawer" [opened]="isNavOpen" role="navigation">
+
+<sidebar-js
+  sidebarjsName="sidebar"
+  [sidebarjsConfig]="{position: 'left', backdropOpacity: 0.3}"
+  (open)="openNav()" (close)="closeNav()">
+  <div style="padding-top: 64px">
     <mat-nav-list>
       <h3 mat-subheader>Led modes:</h3>
       <a mat-list-item (click)="navigate('')" >Solid colors</a>
@@ -8,8 +12,9 @@
       <h3 mat-subheader>Setting:</h3>
       <a mat-list-item (click)="navigate('wifi')">Wifi Settings</a>
     </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
+  </div>
+</sidebar-js>
+
+<div style="padding-top: 64px">
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+</div>
